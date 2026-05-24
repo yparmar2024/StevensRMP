@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // 2. Verify we are on the Stevens Workday domain
   if (!tab.url) {
-    statusEl.textContent = 'Please navigate to the Stevens Workday site to use this extension.';
+    statusEl.textContent = 'Please navigate to the Find Course Sections part of the Stevens Workday site to use this extension.';
     return;
   }
 
@@ -21,8 +21,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   const isWorkdayHost = parsedUrl.hostname === 'wd5.myworkday.com';
-  const isStevensPath = parsedUrl.pathname.startsWith('/stevens/');
-  if (!isWorkdayHost || !isStevensPath) {
+  const isGatewayPage = parsedUrl.pathname === '/stevens/d/gateway.htmld';
+  const isFacetedSearch = parsedUrl.pathname.startsWith('/stevens/d/faceted-search2/');
+  if (!isWorkdayHost || (!isGatewayPage && !isFacetedSearch)) {
     statusEl.textContent = 'Please navigate to the Stevens Workday site to use this extension.';
     return;
   }

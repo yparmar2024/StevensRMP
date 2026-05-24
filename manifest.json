@@ -13,7 +13,8 @@
     "scripting"
   ],
   "host_permissions": [
-    "https://wd5.myworkday.com/*",
+    "https://wd5.myworkday.com/stevens/d/gateway.htmld*",
+    "https://wd5.myworkday.com/stevens/d/faceted-search2/*",
     "https://www.ratemyprofessors.com/*"
   ]
 }

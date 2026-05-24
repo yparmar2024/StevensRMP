@@ -137,6 +137,21 @@ document.addEventListener('DOMContentLoaded', async () => {
             cardRefs.takeAgainEl.innerHTML = formatTakeAgainLine(record.wouldTakeAgainPercent);
             cardRefs.difficultyEl.innerHTML = formatDifficultyLine(record.avgDifficulty);
           });
+
+          const sortedCards = uniqueProfessors.map((prof) => {
+            const record = data[prof];
+            const ratingValue = record && Number.isFinite(Number(record.rating))
+              ? Number(record.rating)
+              : -1;
+            return { prof, ratingValue };
+          }).sort((a, b) => b.ratingValue - a.ratingValue);
+
+          sortedCards.forEach(({ prof }) => {
+            const cardRefs = cardMap.get(prof);
+            if (cardRefs) {
+              cardsContainer.appendChild(cardRefs.cardEl);
+            }
+          });
         }
       );
     }

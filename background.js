@@ -58,15 +58,43 @@ async function fetchRatingsForQuery(query, schoolId) {
 }
 
 function findTeacherMatch(teachers, query) {
-  const normalized = normalizeName(query);
-  return teachers.find((teacher) => {
+  const normalizedQuery = normalizeForMatch(query);
+  const exactMatch = teachers.find((teacher) => {
     const fullName = `${teacher.firstName || ''} ${teacher.lastName || ''}`.trim();
-    return normalizeName(fullName) === normalized;
-  }) || null;
+    return normalizeForMatch(fullName) === normalizedQuery;
+  });
+
+  if (exactMatch) {
+    return exactMatch;
+  }
+
+  const partialMatches = teachers.filter((teacher) => {
+    const fullName = `${teacher.firstName || ''} ${teacher.lastName || ''}`.trim();
+    const normalizedFullName = normalizeForMatch(fullName);
+    return normalizedQuery.includes(normalizedFullName);
+  });
+
+  if (!partialMatches.length) {
+    return null;
+  }
+
+  return partialMatches.sort((a, b) => {
+    const nameA = normalizeForMatch(`${a.firstName || ''} ${a.lastName || ''}`.trim());
+    const nameB = normalizeForMatch(`${b.firstName || ''} ${b.lastName || ''}`.trim());
+    return nameB.length - nameA.length;
+  })[0];
 }
 
 function normalizeName(value) {
   return String(value || '').toLowerCase().replace(/\s+/g, ' ').trim();
+}
+
+function normalizeForMatch(value) {
+  return String(value || '')
+    .toLowerCase()
+    .replace(/[^a-z\s]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
 }
 
 function getTeachersForSchool(store, schoolId) {

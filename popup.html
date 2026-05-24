@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        width: 320px;
+        padding: 15px;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+      }
+      #status {
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: #333;
+        font-size: 14px;
+      }
+      #professorSearch {
+        width: 100%;
+        border: 1px solid #d7d7d7;
+        border-radius: 6px;
+        padding: 8px 10px;
+        font-size: 13px;
+        margin-bottom: 12px;
+        box-sizing: border-box;
+      }
+      #professorSearch:focus {
+        outline: none;
+        border-color: #9aa7b2;
+        box-shadow: 0 0 0 2px rgba(154, 167, 178, 0.25);
+      }
+      #professorCards {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      /* Card Styling */
+      .prof-card {
+        background: white;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 16px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+        transition: box-shadow 0.2s ease;
+        display: flex;
+        gap: 16px;
+        align-items: flex-start;
+      }
+      .prof-card:hover {
+        box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+      }
+      .prof-name-link {
+        font-size: 17px;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin-bottom: 4px;
+        text-decoration: none;
+      }
+      .prof-name-link:hover {
+        text-decoration: underline;
+      }
+      .prof-info {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        min-width: 0;
+      }
+      .rmp-rating-box {
+        width: 64px;
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 26px;
+        font-weight: 800;
+        color: #151515;
+        background: #e9ecef;
+        flex-shrink: 0;
+      }
+      .rmp-rating {
+        font-weight: 800;
+      }
+      .rmp-rating-count {
+        font-size: 12px;
+        color: #4e4e4e;
+        margin-top: 6px;
+        text-align: center;
+        font-weight: 400;
+      }
+      .prof-meta {
+        font-size: 13px;
+        color: #4e4e4e;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        line-height: 1.4;
+      }
+      .prof-meta-value {
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="status">Scanning page...</div>
+    <input id="professorSearch" type="search" placeholder="Search professors..." />
+    <div id="professorCards"></div>
+    
+    <script src="popup.js"></script>
+  </body>
+</html>
